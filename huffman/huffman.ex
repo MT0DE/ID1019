@@ -48,17 +48,17 @@ defmodule Huffman do
   def decode([], _, acc) do Enum.reverse(acc) end
   def decode(seq, tree, acc) do
     # rör sig i trädet tills en bokstav är återfod, fortsätt med resternade
-    {char, rest} = decode_char(seq, tree, []) #logaritmiskt sök-tid
+    {char, rest} = decode_char(seq, tree) #logaritmiskt sök-tid
     decode(rest, tree, [char | acc])
   end
 
-  def decode_char(rest, {char, _}, acc) when is_integer(char) do {char, rest} end
-  def decode_char([bit | rest], {{left, right}, _}, acc) do
+  def decode_char(rest, {char, _}) when is_integer(char) do {char, rest} end
+  def decode_char([bit | rest], {{left, right}, _}) do
     case bit do
       0 ->
-        decode_char(rest, left, acc)
+        decode_char(rest, left)
       1 ->
-        decode_char(rest, right, acc)
+        decode_char(rest, right)
     end
   end
 
