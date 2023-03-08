@@ -47,7 +47,7 @@ defmodule Huffman do
   end
   def decode([], _, acc) do Enum.reverse(acc) end
   def decode(seq, tree, acc) do
-    # rör sig i trädet tills en bokstav är återfod, fortsätt med resternade
+    # rör sig i trädet tills en bokstav är återgiven, fortsätt med resternade
     {char, rest} = decode_char(seq, tree) #logaritmiskt sök-tid
     decode(rest, tree, [char | acc])
   end
